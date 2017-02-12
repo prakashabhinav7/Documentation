@@ -1,0 +1,72 @@
+<body>
+<table border="1">
+		<col width="591">
+	
+	
+	<tr><td  colspan="2" align="left"><h2>MEMORY RELATED OPERATIONS</h2></td></tr>
+	<tr><th>COMMAND</th>		<th>OPERATION</th></tr>
+	<tr><td>$df -h</td>			<td>Check the memory alloted for all the volumes</td></tr>
+	<tr><td>$lsblk</td> 		<td>Check details for all the partitions</td></tr>
+	<tr><td>$vgdisplay</td> 	<td>Indicates the free physical extents(the extent by which a logical volume can be extended)</td></tr>
+	<tr><td>$vgs -o +vg_free_count,vg_extent_count</td> 	<td>Extension of the above vgdisplay -- shows in more human reaadable format</td></tr>
+	<tr><td>$lvresize -L +300GB  /dev/mapper/vg_master1-lv_home</td><td>Increases the size of home volume by 300GB</td></tr>
+	<tr><td>$lvextend -L 700G /dev/mapper/vg_master1-lv_root </td> 		<td>Increases the size of root volume to 700GB</td></tr>
+
+	<tr>
+		<td><b>Example:</b><p>In case there are no extents(i.e. memory) available to extend a logical volume, some other volume can be shrunk and the additional space thus created can be used to increase the size of any other logical volume</p></td>
+		<td>
+			<table border="1">
+				<col width="450">
+
+   				<tr>
+   					<tr><th>COMMAND</th>		<th>OPERATION</th></tr>
+   					<tr><td>$lvresize -L -30GB  /dev/mapper/vg_webserver-lv_home</td> 		<td>Decreases the size of "home" by 30GB</td></tr>
+   					<tr><td>$lvresize -L +30GB  /dev/mapper/vg_webserver-lv_root</td> 		<td>Adds the 30GB that wass deallocated in the above step to the "root"</td></tr>
+   				</tr>
+   			</table>
+		</td>
+	</tr>
+
+	<tr><td  colspan="2" align="left"><h2>DIRECTORY(DETAILS AND TRAVERSAL) RELATED OPERATIONS</h2></td></tr>
+	<tr><th>COMMAND</th>		<th>OPERATION</th></tr>
+	<tr><td>$pwd</td> 						<td>Display the current working directory</td></tr>
+	<tr><td>$mkdir directory_name</td> 		<td>Ceates a new directory</td></tr>
+	<tr><td>$cd directory_name</td> 		<td>Changes the current working directory to the directoy name specifed(downwards traversal)</td></tr>
+	<tr><td>$cd ..</td> 					<td>Changes the current working directory to a level up(upwards traversal)</td></tr>
+	<tr><td>$cd ~</td> 						<td>Changes the current working directory to root(upwards traversal)</td></tr>
+
+	<tr><td>$ls</td> 			<td>Display the folders and the files present in the current working directory</td></tr>
+	<tr><td>$ls -l</td> 		<td>Display the file permissions</td></tr>
+	<tr><td>$ls -a</td> 		<td>Display all the files(including the hidden ones)</td></tr>
+
+	<tr><td>$du -sh</td> 		<td>Displays the memory used by the current folder</td></tr>
+	<tr><td>$du -h</td>			<td>Displays the memory used by the current folder, its subfolder and all the files under it</td></tr>
+	
+	<tr><td>$rmdir directory_name</td> 		<td>Deletes the directory specified by the directoy name(the directory should be empty before deletion)</td></tr>
+	<tr><td>$rm -rf directory_name</td> 		<td>Deletes the directory specified by the directoy name and all the files under that directory</td></tr>
+
+
+	<tr><td  colspan="2" align="left"><h2>FILE OPERATIONS(READ, WRITE, COPY, DELETE, etc.)</h2></td></tr>
+	<tr><th>COMMAND</th>		<th>OPERATION</th></tr>
+	<tr><td>$vi filename</td> 		<td>Creates a file as denoted by the filename and opens it for editing in VI editor</td></tr>
+	<tr><td>$rm filename</td> 		<td>Removes the file specified by the filename(Also used to move files from one directory to other)</td></tr>
+	<tr><td>$mv filename1 filename2</td> 		<td>Renames filename1 to filename2</td></tr>
+	<tr><td>$cp filename1 filename2</td> 		<td>Copies the contents of the filename1 to a new file named filename2</td></tr>
+	
+
+	<tr><td  colspan="2" align="left"><h2>RUNNING AND SCHEDULING JOBS</h2></td></tr>
+	<tr><th>COMMAND</th>		<th>OPERATION</th></tr>
+	<tr><td>$./my-shell-script.sh &</td> 		<td>Run a script in the background</td></tr>
+	<tr><td>$nohup ./my-shell-script.sh &</td> 	<td>Run the script even after logging the user out</td></tr>
+	<tr><td>$at -f my-shell-script.sh 10 am tomorrow</td><td>Schedule a script to run at the specified time</td></tr>
+	
+
+	<tr><td  colspan="2" align="left"><h2>NETWORK RELATED DETAILS AND OPERATIONS</h2></td></tr>
+	<tr><th>COMMAND</th>		<th>OPERATION</th></tr>
+	<tr><td>$ifconfig</td> 		<td>Check the IP address and other network related information </td></tr>
+	<tr><td>$service network restart</td><td>Restarts the connection</td></tr>
+	<tr><td>$service iptables stop</td><td>Turn down firewalls(WARNING: It is advised not to use this option)</td></tr>
+	<tr><td>$service ntpd start</td><td>Network time sync</td></tr>
+	<tr><td>$scp -r sourcedir/ user@dest.com:/dest/dir/</td>	<td>Copying files over the network. The dest.com cols be replaced by the IP address of the host if known</td></tr>
+	
+</body>
